@@ -1,0 +1,2 @@
+# Adding repository
+git remote add origin https://github.com/baloyinm/Stock-Portfolio.git
