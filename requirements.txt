@@ -1,0 +1,11 @@
+#this is a file with all of the requirements 
+pandas
+sqlalchemy
+yfinance
+requests
+json
+bs4
+subprocess
+os
+psycopg2
+pyodbc
