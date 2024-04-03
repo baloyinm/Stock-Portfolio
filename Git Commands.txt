@@ -1,2 +1,19 @@
+#user configuration 
+
+
+git config --global user.name "baloyinm"
+git config --global user.email "baloyinm@gmail.com"
+
+
+
 # Adding repository
 git remote add origin https://github.com/baloyinm/Stock-Portfolio.git
+
+git add . -> add all files in the directory
+
+git commit  -m "reason"
+
+
+# Commiting the changes to the repository
+
+git push origin master
