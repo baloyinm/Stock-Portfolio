@@ -1,0 +1,21 @@
+# Creating virtual environment call venv
+
+python -m venv venv
+
+
+
+# Activating it 
+
+venv\Scripts\activate
+
+
+
+
+# Deactivating it 
+
+
+# installing jupyter and power shell so that it can work on vscode 
+
+pip install powershell_kernel
+pip install jupyter
+
