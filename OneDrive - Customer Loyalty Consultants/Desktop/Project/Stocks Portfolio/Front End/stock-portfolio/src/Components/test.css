@@ -1,0 +1,21 @@
+#grid {
+    display: grid;
+    height: 200px;
+    grid-template-columns: 200px;
+    grid-template-rows: repeat(6, 1fr);
+  }
+  
+  #item1 {
+    background-color: lime;
+  }
+  
+  #item2 {
+    background-color: yellow;
+    grid-row: 2 / 4;
+  }
+  
+  #item3 {
+    background-color: blue;
+    grid-row: span 2 / 7;
+  }
+  

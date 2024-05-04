@@ -1,0 +1,14 @@
+# List of all of the react commands
+
+
+# Add NPM to the path
+
+# Creating the app
+
+npx create-react-app Stock-Portfolio
+
+# starting the project
+npm start
+
+
+

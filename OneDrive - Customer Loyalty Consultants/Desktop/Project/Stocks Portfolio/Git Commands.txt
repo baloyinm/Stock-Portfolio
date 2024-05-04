@@ -1,0 +1,29 @@
+#user configuration 
+
+
+git config --global user.name "baloyinm"
+git config --global user.email "baloyinm@gmail.com"
+
+
+
+# Adding repository
+git remote add origin https://github.com/baloyinm/Stock-Portfolio.git
+
+git add . -> add all files in the directory
+
+git commit  -m "reason"
+
+
+# Commiting the changes to the repository
+
+git push origin master
+
+#removing repository if there are issues:
+
+
+Remove-Item -Recurse -Force .\.git
+
+
+#If there aare issues the remove the git hub repo and then  add the info again using the following:
+git remote remove origin
+git remote add origin https://github.com/baloyinm/Stock-Portfolio.git
