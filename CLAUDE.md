@@ -1,9 +1,12 @@
 # CLAUDE.md: stock-portfolio
 
-<!-- reuse-rule:start v1.1.0 — managed by baloyinm/Re-usable-Component/rules/reuse-rule.md; update it there, not here -->
+<!-- reuse-rule:start v1.3.0 — managed by baloyinm/Re-usable-Component/rules/reuse-rule.md; update it there, not here -->
 ## Re-usable components: check, reuse or modify, then build (Jarvis rule)
 
 The shared library is the private repo **baloyinm/Re-usable-Component** (`CATALOG.md` lists everything; `NAMING.md` sets names). Goal: more planning, less work. Nothing is built from scratch if a library component already does the job, or can be modified to do it.
+
+**At the start of every session: library notices**
+0. Pull `baloyinm/Re-usable-Component` and read `FIX-NOTICES.md`, `DECISIONS.md` and `WHATS-NEW.md`. For every open fix notice addressed to this project: apply the fix to this project's copy, test it here, then mark the notice done in the library (date, commit) and update this project's line in `USAGE.md`. Follow every decision ("use X, not Y"). Note new components that this project could use.
 
 **Reuse check: required before building anything (every task, every session)**
 1. Plan first: list the parts the task needs.
@@ -13,7 +16,7 @@ The shared library is the private repo **baloyinm/Re-usable-Component** (`CATALO
    - **MODIFY**: a component does part of the job, or would with a new option or setting. Change that component in the library (keep the projects already using it working, raise its version), then use it.
    - **BUILD**: only when nothing comes close, or when changing the closest one would break the projects using it or take more work than building new.
 4. Write the reuse check into your plan before writing any code, one line per part: `part · closest component (or none) · USE / MODIFY / BUILD · why`. No building starts until it is written. For every BUILD, say why MODIFY was not possible.
-5. Record what you used in the commit: `uses <name> v<version>`.
+5. Record what you used in the commit: `uses <name> v<version>`, and add or update this project's line in the library's `USAGE.md` (`component · version · project`), so fixes reach you.
 
 **While building**
 6. Build every BUILD part, and anything else that could be used again (a screen part, chart, template, script, connector, sync, scheduled-task prompt, business rule), as a self-contained, generic component: settings instead of hard-coded names, amounts or IDs.
@@ -24,6 +27,9 @@ The shared library is the private repo **baloyinm/Re-usable-Component** (`CATALO
 9. BUILD parts: run the duplicate check again (`python3 tools/find.py <2 to 4 words describing it>`). If anything now does the same job, even partly, treat it as MODIFY. Otherwise add it in its area folder with a `README.md` (header block from `NAMING.md`) and a small `example/`, add one line to `CATALOG.md`, run `python3 tools/find.py --check`, then commit `add <name> (from <this project>)` and push.
 10. Two components that do the same job are never allowed. If you find a pair, merge them and mark the weaker one `deprecated`, pointing to the other.
 11. Never put passwords, keys, tokens, client data or personal details in the library.
+11a. Test before you publish: run the component's example or tests; a component that was not run end to end goes in as `status: draft`.
+11b. One publisher at a time. Before any commit to the library, take the publish lock: pull, and if `.publish-lock` exists with an `expires` time still in the future and another holder, wait 5 minutes and check again (up to 6 times), then leave your components for the nightly sweep and say so. Otherwise write `.publish-lock` (`holder: <project> <session>`, `started`, `expires`: started + 60 minutes), commit `lock: <project> publishing` and push. If that push is refused because someone else pushed, pull and check the lock again. Commit your components one at a time (pull --rebase before each push), then delete `.publish-lock`, commit `unlock: <project>` and push. Never delete another holder's lock unless it has expired.
+11c. If you cannot publish today, leave a line in this repo's `LIBRARY-TODO.md` (`<date> · <part> · ADD/MODIFY <name> · why`): the nightly library sweep (`automations/library-publish-sweep-prompt`) picks it up, tests it and publishes it.
 
 **At the end of each session**
 12. In your final summary, show the reuse check lines and list the components used, modified and added.
